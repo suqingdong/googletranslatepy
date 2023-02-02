@@ -1,0 +1,8 @@
+{
+    "prog": "googletranslatepy",
+    "desc": "Google Translate Client with Python",
+    "url": "https://github.com/suqingdong/googletranslatepy",
+    "author": "suqingdong",
+    "author_email": "suqingdong1114@gmail.com",
+    "version": "1.0.0"
+}
