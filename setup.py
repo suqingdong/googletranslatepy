@@ -20,7 +20,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     entry_points={'console_scripts': [
-        'name = googletranslatepy.bin.main:main',
+        'googletranslate = googletranslatepy.bin:main',
+        'gtrans = googletranslatepy.bin:main',
     ]},
     classifiers=[
         'Development Status :: 5 - Production/Stable',

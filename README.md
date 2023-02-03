@@ -1,4 +1,4 @@
-# Google Translate Client with `itranslate`
+# Google Translate Client with `deep-translator`
 
 ## Install
 
@@ -16,15 +16,17 @@ from googletranslatepy import Translator
 translator = Translator(proxies='http://127.0.0.1:10809')
 
 translator.translate('Life is short, you need Python!')
-# '生活很短，您需要Python！'
+# '人生苦短，你需要 Python！'
 ```
 
 ***CMD***
 
 ```bash
-gtranspy --help
+googletranslate --help
 
-gtranspy 'hello world!' -p http://127.0.0.1:10809
+# translate a string text
+googletranslate -p http://127.0.0.1:10809 'Life is short, you need Python!'
 
-gtranspy 'hello world!' -p http://127.0.0.1:10809 -o result.txt
+# translate a file
+googletranslate -p http://127.0.0.1:10809 README.md
 ```

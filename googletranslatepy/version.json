@@ -1,6 +1,6 @@
 {
     "prog": "googletranslatepy",
-    "desc": "Google Translate Client with Python",
+    "desc": "Google Translate Client with `deep-translator`",
     "url": "https://github.com/suqingdong/googletranslatepy",
     "author": "suqingdong",
     "author_email": "suqingdong1114@gmail.com",
