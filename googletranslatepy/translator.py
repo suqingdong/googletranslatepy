@@ -1,5 +1,6 @@
 import textwrap
 
+import requests
 import deep_translator
 
 
@@ -38,4 +39,11 @@ class Translator(object):
             return res
         except Exception as e:
             print(e)
+            return False
+
+    def check_proxies(self, timeout=5):
+        url = self.trans._base_url
+        try:
+            return requests.head(url, proxies=self.proxies, timeout=timeout)
+        except Exception:
             return False

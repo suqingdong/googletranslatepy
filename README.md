@@ -13,7 +13,11 @@ python3 -m pip install googletranslatepy
 ```python
 from googletranslatepy import Translator
 
+# use a http proxies
 translator = Translator(proxies='http://127.0.0.1:10809')
+
+# use a socks5 proxies
+translator = Translator(proxies='socks5://127.0.0.1:10808')
 
 translator.translate('Life is short, you need Python!')
 # '人生苦短，你需要 Python！'

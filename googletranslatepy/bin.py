@@ -31,22 +31,27 @@ EPILOG = click.style(
 )
 @click.argument('text')
 @click.version_option(version=version_info['version'], prog_name=version_info['prog'])
-@click.option('-p', '--proxies', help='the proxies url, eg. http://127.0.0.1:1080')
+@click.option('-p', '--proxies', help='the proxies url, eg. http://127.0.0.1:1080', envvar='GOOGLE_PROXIES', show_envvar=True)
 @click.option('-s', '--source', help='the source language', default='auto', show_default=True)
 @click.option('-t', '--target', help='the target language', default='zh-CN', show_default=True)
 @click.option('-l', '--languages', help='list all available languages', is_flag=True)
 @click.option('-o', '--outfile', help='the output filename [stdout]')
 def cli(**kwargs):
 
+
     if kwargs['languages']:
         rich.print_json(json.dumps(
             deep_translator.constants.GOOGLE_LANGUAGES_TO_CODES))
         exit(0)
 
-    translator = Translator(source=kwargs['source'],
-                            target=kwargs['target'],
-                            proxies=kwargs['proxies'],
-                            )
+    proxies = kwargs['proxies'] or os.getenv('GOOGLE_PROXIES')
+    translator = Translator(source=kwargs['source'], target=kwargs['target'], proxies=proxies)
+    if proxies:
+        if not translator.check_proxies():
+            click.secho(f'bad proxies: {proxies}', err=True, fg='red')
+            exit(1)
+        else:
+            click.secho(f'>>> use proxies: {proxies}', err=True, fg='green')
 
     outfile = (kwargs['outfile'])
     out = util.safe_open(outfile, 'w') if outfile else sys.stdout
