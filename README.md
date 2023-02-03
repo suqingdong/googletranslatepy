@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-python3 -m pip install googletranslatepy
+python3 -m pip install googletranslate-python
 ```
 
 ## Usage
