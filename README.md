@@ -33,4 +33,12 @@ googletranslate -p http://127.0.0.1:10809 'Life is short, you need Python!'
 
 # translate a file
 googletranslate -p http://127.0.0.1:10809 README.md
+
+# set proxies to env
+GOOGLE_PROXIES=http://127.0.0.1:10809 googletranslate 'hello world'
+
+# or add to: ~/.bash_profile
+export GOOGLE_PROXIES=http://127.0.0.1:10809
+# and then use it directly
+googletranslate 'hello world'
 ```
