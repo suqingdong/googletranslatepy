@@ -1,9 +1,11 @@
 import os
 import sys
 import json
+import functools
 
 import rich
 import click
+import requests
 import deep_translator
 
 from googletranslatepy import (
@@ -36,16 +38,22 @@ EPILOG = click.style(
 @click.option('-t', '--target', help='the target language', default='zh-CN', show_default=True)
 @click.option('-l', '--languages', help='list all available languages', is_flag=True)
 @click.option('-o', '--outfile', help='the output filename [stdout]')
+@click.option('-t', '--timeout', help='the timeout of requests', type=float, default=5, show_default=True)
 def cli(**kwargs):
-
 
     if kwargs['languages']:
         rich.print_json(json.dumps(
             deep_translator.constants.GOOGLE_LANGUAGES_TO_CODES))
         exit(0)
 
+    timeout = kwargs['timeout']
+    for method in ('get', 'post'):
+        func = getattr(requests, method)
+        setattr(requests, method, functools.partial(func, timeout=timeout))
+
     proxies = kwargs['proxies'] or os.getenv('GOOGLE_PROXIES')
-    translator = Translator(source=kwargs['source'], target=kwargs['target'], proxies=proxies)
+    translator = Translator(
+        source=kwargs['source'], target=kwargs['target'], proxies=proxies)
     if proxies:
         if not translator.check_proxies():
             click.secho(f'bad proxies: {proxies}', err=True, fg='red')
