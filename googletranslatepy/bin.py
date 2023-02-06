@@ -31,7 +31,7 @@ EPILOG = click.style(
     no_args_is_help=True,
     epilog=EPILOG,
 )
-@click.argument('text')
+@click.argument('text', nargs=-1)
 @click.version_option(version=version_info['version'], prog_name=version_info['prog'])
 @click.option('-p', '--proxies', help='the proxies url, eg. http://127.0.0.1:1080', envvar='GOOGLE_PROXIES', show_envvar=True)
 @click.option('-s', '--source', help='the source language', default='auto', show_default=True)
@@ -39,11 +39,17 @@ EPILOG = click.style(
 @click.option('-l', '--languages', help='list all available languages', is_flag=True)
 @click.option('-o', '--outfile', help='the output filename [stdout]')
 @click.option('-t', '--timeout', help='the timeout of requests', type=float, default=5, show_default=True)
-def cli(**kwargs):
+@click.pass_context
+def cli(ctx, **kwargs):
 
     if kwargs['languages']:
         rich.print_json(json.dumps(
             deep_translator.constants.GOOGLE_LANGUAGES_TO_CODES))
+        exit(0)
+
+    text = ''.join(kwargs['text'])
+    if not text:
+        print(ctx.get_usage())
         exit(0)
 
     timeout = kwargs['timeout']
@@ -64,7 +70,6 @@ def cli(**kwargs):
     outfile = (kwargs['outfile'])
     out = util.safe_open(outfile, 'w') if outfile else sys.stdout
     with out:
-        text = kwargs['text']
         if os.path.isfile(text):
             text = open(text).read()
 
