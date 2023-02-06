@@ -28,6 +28,15 @@ translator.translate('Life is short, you need Python!')
 ```bash
 googletranslate --help
 
+# list all available languages
+googletranslate -l
+# {
+#  "afrikaans": "af",
+#  "albanian": "sq",
+#  "amharic": "am",
+#  "arabic": "ar",
+# ...
+
 # translate a string text
 googletranslate -p http://127.0.0.1:10809 'Life is short, you need Python!'
 
