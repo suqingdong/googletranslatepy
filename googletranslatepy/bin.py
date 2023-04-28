@@ -38,7 +38,7 @@ EPILOG = click.style(
 @click.option('-t', '--target', help='the target language', default='zh-CN', show_default=True)
 @click.option('-l', '--languages', help='list all available languages', is_flag=True)
 @click.option('-o', '--outfile', help='the output filename [stdout]')
-@click.option('-t', '--timeout', help='the timeout of requests', type=float, default=5, show_default=True)
+@click.option('-T', '--timeout', help='the timeout of requests', type=float, default=5, show_default=True)
 @click.pass_context
 def cli(ctx, **kwargs):
 

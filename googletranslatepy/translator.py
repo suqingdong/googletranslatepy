@@ -22,7 +22,7 @@ class Translator(object):
             proxies=self.proxies,
         )
 
-    def translate(self, text):
+    def translate(self, text, **kwargs):
         """
             the length of characters is limited within 5000,
         """
@@ -35,7 +35,7 @@ class Translator(object):
             replace_whitespace=False,
         )
         try:
-            res = ' '.join(self.trans.translate(t) for t in text_list)
+            res = ' '.join(self.trans.translate(t, **kwargs) for t in text_list)
             return res
         except Exception as e:
             print(e)
