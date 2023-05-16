@@ -19,7 +19,8 @@ translator = Translator(proxies='http://127.0.0.1:10809')
 # use a socks5 proxies
 translator = Translator(proxies='socks5://127.0.0.1:10808')
 
-translator.translate('Life is short, you need Python!')
+result = translator.translate('Life is short, you need Python!')
+print(result)
 # '人生苦短，你需要 Python！'
 ```
 
