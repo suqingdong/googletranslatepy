@@ -21,6 +21,12 @@ translator = Translator(proxies='socks5://127.0.0.1:10808')
 
 translator.translate('Life is short, you need Python!')
 # '人生苦短，你需要 Python！'
+
+# provide custom source and target language:
+translator = Translator(source='en', target='ja')
+
+translator.translate('Python is executable pseudocode!')
+# Python は実行可能な疑似コードです。
 ```
 
 ***CMD***
